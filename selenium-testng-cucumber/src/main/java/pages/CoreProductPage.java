@@ -49,13 +49,12 @@ public class CoreProductPage extends BasePage {
     public void captureAllJacketPrices(String filePath) {
 
         try {
-            // ✅ Write CSV header
-            String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-            File dir = new File(filePath);
-            if (!dir.exists()) {
-                dir.mkdirs();
+            File file = new File(filePath + ".txt");
+            File parentDir = file.getParentFile();
+            if (parentDir != null && !parentDir.exists()) {
+                parentDir.mkdirs();
             }
-            File file = new File(dir, "jacketPrices_" + timestamp + ".txt");
+
             try(FileWriter writer = new FileWriter(file)) {
                 writer.write("Product Name,Price,TopSellingmessage\n");
 
@@ -69,7 +68,7 @@ public class CoreProductPage extends BasePage {
                 for (int i = 1; i < pageElements.size(); i++) {
 
                     List<WebElement> JacketPrices = FindElementsWithLocator(CorePage.productCards);
-                    for (int j = 1; j <= 3; j++) {
+                    for (int j = 1; j <= JacketPrices.size(); j++) {
                         String price = getAttribute(CorePage.getLocatorOfJacketPrice(String.valueOf(j)), "outerText");
                         String title = getAttribute(CorePage.getLocatorOfProductTitle(String.valueOf(j)), "outerText");
                         String topSellerMessage = getAttribute(CorePage.getLocatorOfTopSellerMessage(String.valueOf(j)), "outerText");

@@ -23,7 +23,7 @@ public class CoreProduct extends BaseSteps {
     @Then("I will capture prices relates to all the jackets")
     public void iWillCapturePricesRelatesToAllTheJackets() {
         try {
-            CProductPage.captureAllJacketPrices(testData.get("filepath").toString());
+            CProductPage.captureAllJacketPrices(testData.get("filePath").toString());
             // Write code here that turns the phrase above into concrete actions
         } catch (Exception e) {
             e.printStackTrace();
