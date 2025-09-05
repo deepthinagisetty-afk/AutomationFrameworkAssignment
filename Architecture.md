@@ -1,6 +1,6 @@
 # Framework Architecture
 
-Below is the architecture of the **selenium-testng-cucumber** framework:
+This document illustrates the architecture of the selenium-testng-cucumber automation framework.
 
 ```mermaid
 flowchart TB
@@ -8,29 +8,29 @@ flowchart TB
     direction TB
     subgraph Module[selenium-testng-cucumber]
       direction TB
-      Runner[runner/\nTestRunner & per-feature runners]
-      Features[resources/features\n(.feature files)]
-      Steps[steps/\nStep Definitions]
-      Hooks[hooks/\n@Before/@After]
-      Listeners[utils/\nFeaturePathListener, TestNG listeners]
-      Utils[utils/\nDriverFactory, DriverManager,\nJsonDataReader, TestDataLoader]
-      Reports[Reports\n(cucumber html/json, extent)]
-      TestNG[testng.xml]
+      Runner[Runner - TestRunner and per feature runners]
+      Features[Features - feature files]
+      Steps[Step Definitions]
+      Hooks[Hooks - before and after]
+      Listeners[Listeners - FeaturePathListener and TestNG listeners]
+      Utils[Utils - DriverFactory DriverManager JsonDataReader TestDataLoader]
+      Reports[Reports - cucumber html and json and extent]
+      TestNG[TestNG - testng.xml]
       Pom[pom.xml]
     end
-    CI[CI / Maven\n(mvn test, surefire)] -->|runs| Module
-    IDE[IntelliJ] -->|run/debug| Module
+    CI[CI - Maven] --> Module
+    IDE[IntelliJ] --> Module
   end
 
   TestNG --> Listeners
   Listeners --> Runner
-  Runner -->|boots Cucumber| Features
+  Runner --> Features
   Runner --> Steps
   Runner --> Hooks
   Hooks --> Utils
   Steps --> Utils
   Hooks --> DriverMgr[DriverManager]
-  DriverMgr --> WebDriver[WebDriver (ThreadLocal)]
-  Utils --> TestData[Json testdata]
+  DriverMgr --> WebDriver[WebDriver thread local]
+  Utils --> TestData[Json test data]
   Runner --> Reports
   Reports --> CI
