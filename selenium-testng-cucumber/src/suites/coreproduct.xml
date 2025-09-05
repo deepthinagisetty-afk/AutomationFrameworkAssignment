@@ -1,0 +1,20 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="CoreProductAutomationSuite" parallel="tests" thread-count="2">
+
+
+    <listeners>
+        <listener class-name="utils.FeaturePathListener"/>
+    </listeners>
+
+    <test name="CoreProduct-HomePage">
+        <parameter name="browser" value="edge"/>
+        <parameter name="features" value="src/test/resources/features/CoreProduct.feature"/>
+        <parameter name="dataFile" value="CPData.json"/>
+        <classes>
+            <class name="runner.TestRunner"/>
+        </classes>
+    </test>
+
+
+
+</suite>
